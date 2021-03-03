@@ -1,6 +1,5 @@
 """Generate Markov text from text files."""
 
-#  from random import choice
 import random
 
 def open_and_read_file(file_path):
@@ -12,7 +11,7 @@ def open_and_read_file(file_path):
 
     contents = open(file_path).read()
 
-    return contents #'Contents of your file as one long string'
+    return contents 
 
 
 def make_chains(text_string):
@@ -46,22 +45,13 @@ def make_chains(text_string):
     for i in range(len(words) - 1):
         
         chains[(words[i], words[i + 1])] = []
-
-        # chains[(word at index 1, word at index 2)] = []
-
-        # lists_animals = []
-        # lists_animals.append('cat')
         
         if (i + 2) == (len(words) - 1):
             break
 
     for i in range(len(words) - 1):
         
-        chains[(words[i], words[i + 1])].append(words[i + 2])
-    
-        # lists_animals = []
-        # lists_animals.append('cat')
-        
+        chains[(words[i], words[i + 1])].append(words[i + 2)  
 
         if (i + 2) == (len(words) - 1):
             break            
@@ -73,8 +63,6 @@ def make_text(chains):
     """Return text from chains."""
 
     words = []
-
-    # your code goes here
 
     current_key = random.choice(sorted(chains))
 
@@ -93,13 +81,7 @@ def make_text(chains):
     return ' '.join(words)
 
 
-
-# ('Would', 'you'): ['could', 'could', 'could', 'like']
-# randomly chooses could
-# append could into word list
-# put it into tuple, use new tuple to look up next random word
-# loops
-
+# Pseudocode
 # first_key = random.choice(sorted(chains))
         # will give us a tuple
 # since the first_key is assigned, I can index into first_key[1] and get the second word of the tuple
@@ -107,13 +89,6 @@ def make_text(chains):
 # chosen_word = random.choice(chains[first_key]) will give us random item from that list
 # words.append(chosen_word)
 # new_tuple = (new_key_first_word, chosen_word)
-
-
-
-
-
-('you', 'could') # store this in words list
-
 
 
 
