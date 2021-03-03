@@ -1,7 +1,7 @@
 """Generate Markov text from text files."""
 
-from random import choice
-
+#  from random import choice
+import random
 
 def open_and_read_file(file_path):
     """Take file path as string; return text as string.
@@ -46,7 +46,9 @@ def make_chains(text_string):
     for i in range(len(words) - 1):
         
         chains[(words[i], words[i + 1])] = []
-        
+
+        # chains[(word at index 1, word at index 2)] = []
+
         # lists_animals = []
         # lists_animals.append('cat')
         
@@ -56,7 +58,7 @@ def make_chains(text_string):
     for i in range(len(words) - 1):
         
         chains[(words[i], words[i + 1])].append(words[i + 2])
-        
+    
         # lists_animals = []
         # lists_animals.append('cat')
         
@@ -64,14 +66,7 @@ def make_chains(text_string):
         if (i + 2) == (len(words) - 1):
             break            
     
-
-
-
     return chains
-
-
-
-
 
 
 def make_text(chains):
@@ -81,7 +76,46 @@ def make_text(chains):
 
     # your code goes here
 
+    current_key = random.choice(sorted(chains))
+
+    while True:
+        
+        chosen_word = random.choice(chains[current_key])
+
+        words.append(chosen_word)
+    
+        new_key = (current_key[1], chosen_word)
+
+        current_key = new_key
+
+        if current_key not in chains:
+            break
     return ' '.join(words)
+
+
+
+# ('Would', 'you'): ['could', 'could', 'could', 'like']
+# randomly chooses could
+# append could into word list
+# put it into tuple, use new tuple to look up next random word
+# loops
+
+# first_key = random.choice(sorted(chains))
+        # will give us a tuple
+# since the first_key is assigned, I can index into first_key[1] and get the second word of the tuple
+# new_key_first_word = first_key[1]
+# chosen_word = random.choice(chains[first_key]) will give us random item from that list
+# words.append(chosen_word)
+# new_tuple = (new_key_first_word, chosen_word)
+
+
+
+
+
+('you', 'could') # store this in words list
+
+
+
 
 
 input_path = 'green-eggs.txt'
@@ -96,3 +130,4 @@ chains = make_chains(input_text)
 random_text = make_text(chains)
 
 print(random_text)
+
